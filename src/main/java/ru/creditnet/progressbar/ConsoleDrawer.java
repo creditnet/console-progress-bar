@@ -11,13 +11,13 @@ import java.util.function.Function;
  * @author antivoland
  */
 class ConsoleDrawer implements Closeable {
-    private static final BiFunction<Long, Long, String> PERCENTAGE_FORMAT = (max, current) -> {
+    static final BiFunction<Long, Long, String> PERCENTAGE_FORMAT = (max, current) -> {
         if (max <= 0) return "     ";
         return String.format(" %1$3s%%", Math.round(100.0 * current / max));
     };
 
-    private static final BiFunction<Long, Long, String> ABSOLUTE_RATIO_FORMAT = (max, current) ->
-            String.format(" [ %d / %d ]", current, max);
+    static final BiFunction<Long, Long, String> ABSOLUTE_RATIO_FORMAT = (max, current) ->
+            String.format("[ %d / %d ]", current, max);
 
     private static final Function<Duration, String> DURATION_FORMAT = duration -> {
         if (duration == null) return "?";
@@ -26,7 +26,7 @@ class ConsoleDrawer implements Closeable {
     };
 
     private static final BiFunction<Duration, Duration, String> DURATION_RATIO_FORMAT = (elapsed, estimated) ->
-            String.format(" %s / %s", DURATION_FORMAT.apply(elapsed), DURATION_FORMAT.apply(estimated));
+            String.format("%s / %s", DURATION_FORMAT.apply(elapsed), DURATION_FORMAT.apply(estimated));
 
     private final PrintStream stream;
 
@@ -37,7 +37,9 @@ class ConsoleDrawer implements Closeable {
     void draw(ProgressState state) {
         stream.print('\r');
         stream.print(PERCENTAGE_FORMAT.apply(state.max(), state.current()));
+        stream.print(' ');
         stream.print(ABSOLUTE_RATIO_FORMAT.apply(state.max(), state.current()));
+        stream.print(' ');
         stream.print(DURATION_RATIO_FORMAT.apply(state.elapsed(), state.estimated()));
     }
 

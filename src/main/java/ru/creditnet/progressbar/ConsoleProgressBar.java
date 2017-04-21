@@ -8,7 +8,7 @@ import java.io.PrintStream;
  * @author antivoland
  */
 public class ConsoleProgressBar implements Closeable {
-    private static final long DEFAULT_TICK_MILLIS = 1000;
+    static final long DEFAULT_TICK_MILLIS = 1000;
 
     private final ProgressState state;
     private final ConsoleDrawer drawer;
