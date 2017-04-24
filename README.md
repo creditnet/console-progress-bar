@@ -4,6 +4,16 @@ The simplest console-based progress bar with non-blocking interface for Java.
 
 ![Animated preview](bar.gif)
 
+## Maven
+
+```xml
+<dependency>
+    <groupId>ru.creditnet</groupId>
+    <artifactId>console-progress-bar</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 ## Usage
 
 ```java

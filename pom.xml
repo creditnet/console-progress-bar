@@ -6,7 +6,7 @@
 
     <groupId>ru.creditnet</groupId>
     <artifactId>console-progress-bar</artifactId>
-    <version>0.5.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>Console progress bar</name>
     <description>The simplest console-based progress bar for Java</description>
@@ -28,8 +28,9 @@
     </licenses>
 
     <scm>
-        <url>git@github.com:creditnet/console-progress-bar.git</url>
-        <connection>scm:git:git@github.com:creditnet/console-progress-bar.git</connection>
+        <connection>scm:git:git://github.com/creditnet/console-progress-bar.git</connection>
+        <developerConnection>scm:git:ssh://github.com:creditnet/console-progress-bar.git</developerConnection>
+        <url>http://github.com/creditnet/console-progress-bar</url>
     </scm>
 
     <developers>
@@ -39,6 +40,17 @@
             <url>https://github.com/antivoland</url>
         </developer>
     </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +64,7 @@
         <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
         <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
         <maven.javadoc.plugin.version>2.10.4</maven.javadoc.plugin.version>
+        <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
     </properties>
 
     <dependencies>
@@ -104,6 +117,21 @@
                         <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
