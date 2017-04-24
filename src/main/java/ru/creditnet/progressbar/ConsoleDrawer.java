@@ -12,8 +12,8 @@ import java.util.function.Function;
  */
 class ConsoleDrawer implements Closeable {
     static final BiFunction<Long, Long, String> PERCENTAGE_FORMAT = (max, current) -> {
-        if (max <= 0) return "     ";
-        return String.format(" %1$3s%%", Math.round(100.0 * current / max));
+        if (max <= 0) return "    ";
+        return String.format("%1$3s%%", Math.round(100.0 * current / max));
     };
 
     static final BiFunction<Long, Long, String> ABSOLUTE_RATIO_FORMAT = (max, current) ->

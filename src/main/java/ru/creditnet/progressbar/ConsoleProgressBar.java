@@ -44,7 +44,7 @@ public class ConsoleProgressBar implements Closeable {
         }
         this.state = new ProgressState(max);
         this.drawer = new ConsoleDrawer(stream);
-        this.worker = new Thread(() -> {
+        (this.worker = new Thread(() -> {
             while (true) {
                 drawer.draw(state);
                 try {
@@ -53,7 +53,7 @@ public class ConsoleProgressBar implements Closeable {
                     break;
                 }
             }
-        });
+        })).start();
     }
 
     /**
@@ -69,7 +69,9 @@ public class ConsoleProgressBar implements Closeable {
      * @param delta step size
      */
     public void stepBy(long delta) {
-        if (delta < 0) throw new IllegalArgumentException("Delta must be non-negative");
+        if (delta < 0) {
+            throw new IllegalArgumentException("Delta must be non-negative");
+        }
         state.stepBy(delta);
     }
 
