@@ -8,6 +8,37 @@
     <artifactId>console-progress-bar</artifactId>
     <version>0.5.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>Console progress bar</name>
+    <description>The simplest console-based progress for Java</description>
+    <url>http://github.com/creditnet/console-progress-bar</url>
+
+    <organization>
+        <name>National Credit Bureau</name>
+        <url>http://creditnet.ru</url>
+    </organization>
+
+    <inceptionYear>2017</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>http://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>git@github.com:creditnet/console-progress-bar.git</url>
+        <connection>scm:git:git@github.com:creditnet/console-progress-bar.git</connection>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>antivoland</id>
+            <name>Vladimir Pavlovski</name>
+            <url>https://github.com/antivoland</url>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,7 +49,9 @@
         <junit.version>4.12</junit.version>
         <logback.version>1.1.11</logback.version>
 
-        <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
+        <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>2.10.4</maven.javadoc.plugin.version>
     </properties>
 
     <dependencies>
@@ -46,6 +79,34 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
