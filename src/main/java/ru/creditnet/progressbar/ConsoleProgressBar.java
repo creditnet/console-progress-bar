@@ -19,7 +19,15 @@ public class ConsoleProgressBar implements Closeable {
     }
 
     public ConsoleProgressBar(long max, PrintStream stream, long tickMillis) {
-        if (tickMillis <= 0) throw new IllegalArgumentException("Tick millis must be positive");
+        if (max < 0) {
+            throw new IllegalArgumentException("Max value must be non-negative");
+        }
+        if (stream == null) {
+            throw new NullPointerException("Stream must not be null");
+        }
+        if (tickMillis <= 0) {
+            throw new IllegalArgumentException("Tick millis must be positive");
+        }
         this.state = new ProgressState(max);
         this.drawer = new ConsoleDrawer(stream);
         this.worker = new Thread(() -> {
@@ -39,6 +47,7 @@ public class ConsoleProgressBar implements Closeable {
     }
 
     public void stepBy(long delta) {
+        if (delta < 0) throw new IllegalArgumentException("Delta must be non-negative");
         state.stepBy(delta);
     }
 

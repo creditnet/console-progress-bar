@@ -13,7 +13,6 @@ class ProgressState {
     private final LocalDateTime start = LocalDateTime.now();
 
     ProgressState(long max) {
-        if (max < 0) throw new IllegalArgumentException("Max value must be non-negative");
         this.max = max;
     }
 
